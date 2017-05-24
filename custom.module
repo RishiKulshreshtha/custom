@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @file
+ * This is the module file of the custom module.
+ */
+
+/**
+ * Implements hook_block_info().
+ */
+function custom_block_info() {
+  $blocks['merged'] = array(
+    'info' => t('Merged Blocks'),
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function custom_block_view($delta = '') {
+  $block = array();
+
+  switch ($delta) {
+    case 'merged':
+      module_load_include('inc', 'custom', 'custom.block');
+      $block['subject'] = t('Views Merged Blocks');
+      $block['content'] = _merged_blocks();
+      break;
+  }
+  return $block;
+}
